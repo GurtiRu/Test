@@ -18,6 +18,11 @@ namespace ggPrint
         {
 
         }
+        public string Report { get; set; }
+        public string XmlDatei { get; set; }
+        public string Fehler { get; private set; }
+        public string Druckername { get; set; }
+        public int Copies { get; set; }
         public void Drucken()
         {
             try
@@ -62,8 +67,6 @@ namespace ggPrint
 
             }
             PrintQueue p1 = null;
-            //List<string> printersList = new List<string>();
-            //List<string> serversList = new List<string>();
             var server = new PrintServer();
             var queues = server.GetPrintQueues(new[] { EnumeratedPrintQueueTypes.Local });
             foreach (var queue in queues)
@@ -72,17 +75,10 @@ namespace ggPrint
                 if (queue.FullName.ToLower() == Druckername.ToLower())
                 {
                     p1 = queue;
-                    //if (!serversList.Contains(queue.HostingPrintServer.Name))
-                    //{
-                    //    serversList.Add(queue.HostingPrintServer.Name);
-                    //}
-                    //printersList.Add(queue.FullName);
+  
                 }
             }
-            //            server = new PrintServer(serversList[0].ToString());
-
-            //            PrintQueue printer1 = server.GetPrintQueue(printersList[0].ToString());
-            //          return printer1;
+            
             if (p1 == null)
             {
                 queues = server.GetPrintQueues(new[] { EnumeratedPrintQueueTypes.Connections });
@@ -96,18 +92,7 @@ namespace ggPrint
                     }
                 }
             }
-
-
             return p1;
         }
-
-        public string Report { get; set; }
-        public string XmlDatei { get; set; }
-        public string Fehler { get; private set; }
-        public string Druckername { get; set; }
-        public int Copies { get; set; }
-
-
-
     }
 }
