@@ -86,8 +86,7 @@ namespace ggPrint
             if (p1 == null)
             {
                 queues = server.GetPrintQueues(new[] { EnumeratedPrintQueueTypes.Connections });
-                var q = from q in queues
-                        select 
+                
                 foreach (var queue in queues)
                 {
 
